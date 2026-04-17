@@ -43,9 +43,9 @@ module vending_behavioral (
     // Magazzino Monete (Quantità disponibili per il resto)
     reg [5:0] qty_c01, qty_c02, qty_c05, qty_c10;
 
-    // Variabili per l'algoritmo Greedy (uso 'integer' per calcoli immediati)
-    integer calc_resto;
-    integer calc_qty;
+    // Variabili per l'algoritmo Greedy
+    reg [5:0] calc_resto;
+    reg [5:0] calc_qty;
     reg [5:0] current_price;
 
     // ==========================================
@@ -87,8 +87,10 @@ module vending_behavioral (
                                stato <= S_IDLE; // Fine setup
                                init_counter <= 0;
                         end
+                        default: begin
+                        end
                     endcase
-                    if (init_counter < 11) init_counter <= init_counter + 1;
+                    if (init_counter < 4'd11) init_counter <= init_counter + 4'd1;
                 end
 
                 // --------------------------------------------------
@@ -106,10 +108,12 @@ module vending_behavioral (
                         stato <= S_OPERATIVA;
                         // Decodifica moneta e aggiorna credito/disponibile
                         case (coin)
-                            3'b100: begin credito <= credito + 1;  disponibile <= disponibile + 1;  end // 0.10
-                            3'b101: begin credito <= credito + 2;  disponibile <= disponibile + 2;  end // 0.20
-                            3'b110: begin credito <= credito + 5;  disponibile <= disponibile + 5;  end // 0.50
-                            3'b111: begin credito <= credito + 10; disponibile <= disponibile + 10; end // 1.00
+                            3'b100: begin credito <= credito + 6'd1;  disponibile <= disponibile + 10'd1;  end // 0.10
+                            3'b101: begin credito <= credito + 6'd2;  disponibile <= disponibile + 10'd2;  end // 0.20
+                            3'b110: begin credito <= credito + 6'd5;  disponibile <= disponibile + 10'd5;  end // 0.50
+                            3'b111: begin credito <= credito + 6'd10; disponibile <= disponibile + 10'd10; end // 1.00
+                            default: begin
+                            end
                         endcase
                     end
                 end
@@ -121,17 +125,19 @@ module vending_behavioral (
                     // 1. Inserimento ulteriori monete
                     if (coin != 3'b000) begin
                         case (coin)
-                            3'b100: begin credito <= credito + 1;  disponibile <= disponibile + 1;  end
-                            3'b101: begin credito <= credito + 2;  disponibile <= disponibile + 2;  end
-                            3'b110: begin credito <= credito + 5;  disponibile <= disponibile + 5;  end
-                            3'b111: begin credito <= credito + 10; disponibile <= disponibile + 10; end
+                            3'b100: begin credito <= credito + 6'd1;  disponibile <= disponibile + 10'd1;  end
+                            3'b101: begin credito <= credito + 6'd2;  disponibile <= disponibile + 10'd2;  end
+                            3'b110: begin credito <= credito + 6'd5;  disponibile <= disponibile + 10'd5;  end
+                            3'b111: begin credito <= credito + 6'd10; disponibile <= disponibile + 10'd10; end
+                            default: begin
+                            end
                         endcase
                     end
                     // 2. Annulla operazione
                     else if (annulla) begin
                         resto <= credito; // Restituisce tutto
-                        credito <= 0;
-                        disponibile <= disponibile - credito; // Toglie dalla cassa
+                        credito <= 6'd0;
+                        disponibile <= disponibile - {4'd0, credito}; // Toglie dalla cassa
                         stato <= S_IDLE;
                     end
                     // 3. Conferma acquisto
@@ -139,53 +145,49 @@ module vending_behavioral (
                         // Controllo validità prodotto e credito
                         case (selezione)
                             3'b100: begin // P1
-                                if (credito < price_p1 || qty_p1 == 0) begin
-                                    errore <= (credito < price_p1);
-                                    errore[1] <= (qty_p1 == 0);
+                                if (credito < price_p1 || qty_p1 == 6'd0) begin
+                                    errore <= {(qty_p1 == 6'd0), (credito < price_p1)};
                                     if (credito < price_p1) resto <= price_p1; // Mostra prezzo mancante
                                     stato <= S_IDLE; 
                                 end else begin
                                     current_price = price_p1; // Salva per dopo
-                                    qty_p1 <= qty_p1 - 1;     // Decrementa stock
+                                    qty_p1 <= qty_p1 - 6'd1;  // Decrementa stock
                                     prodotto1 <= 1;           // Attiva erogazione
                                     stato <= S_EROGAZIONE;
                                 end
                             end
                             3'b101: begin // P2
-                                if (credito < price_p2 || qty_p2 == 0) begin
-                                    errore <= (credito < price_p2);
-                                    errore[1] <= (qty_p2 == 0);
+                                if (credito < price_p2 || qty_p2 == 6'd0) begin
+                                    errore <= {(qty_p2 == 6'd0), (credito < price_p2)};
                                     if (credito < price_p2) resto <= price_p2;
                                     stato <= S_IDLE;
                                 end else begin
                                     current_price = price_p2;
-                                    qty_p2 <= qty_p2 - 1;
+                                    qty_p2 <= qty_p2 - 6'd1;
                                     prodotto2 <= 1;
                                     stato <= S_EROGAZIONE;
                                 end
                             end
                             3'b110: begin // P3
-                                if (credito < price_p3 || qty_p3 == 0) begin
-                                    errore <= (credito < price_p3);
-                                    errore[1] <= (qty_p3 == 0);
+                                if (credito < price_p3 || qty_p3 == 6'd0) begin
+                                    errore <= {(qty_p3 == 6'd0), (credito < price_p3)};
                                     if (credito < price_p3) resto <= price_p3;
                                     stato <= S_IDLE;
                                 end else begin
                                     current_price = price_p3;
-                                    qty_p3 <= qty_p3 - 1;
+                                    qty_p3 <= qty_p3 - 6'd1;
                                     prodotto3 <= 1;
                                     stato <= S_EROGAZIONE;
                                 end
                             end
                             3'b111: begin // P4
-                                if (credito < price_p4 || qty_p4 == 0) begin
-                                    errore <= (credito < price_p4);
-                                    errore[1] <= (qty_p4 == 0);
+                                if (credito < price_p4 || qty_p4 == 6'd0) begin
+                                    errore <= {(qty_p4 == 6'd0), (credito < price_p4)};
                                     if (credito < price_p4) resto <= price_p4;
                                     stato <= S_IDLE;
                                 end else begin
                                     current_price = price_p4;
-                                    qty_p4 <= qty_p4 - 1;
+                                    qty_p4 <= qty_p4 - 6'd1;
                                     prodotto4 <= 1;
                                     stato <= S_EROGAZIONE;
                                 end
@@ -210,21 +212,21 @@ module vending_behavioral (
                     if (calc_qty > qty_c10) calc_qty = qty_c10; // Quante ne ho?
                     coin_10 <= calc_qty;                       // Output
                     qty_c10 <= qty_c10 - calc_qty;             // Aggiorno stock
-                    calc_resto = calc_resto - (calc_qty * 10); // Resto rimanente
+                    calc_resto = calc_resto - (calc_qty * 6'd10); // Resto rimanente
 
                     // 2. Monete da 0.50 (5 decimi)
                     calc_qty = calc_resto / 5;
                     if (calc_qty > qty_c05) calc_qty = qty_c05;
                     coin_05 <= calc_qty;
                     qty_c05 <= qty_c05 - calc_qty;
-                    calc_resto = calc_resto - (calc_qty * 5);
+                    calc_resto = calc_resto - (calc_qty * 6'd5);
 
                     // 3. Monete da 0.20 (2 decimi)
                     calc_qty = calc_resto / 2;
                     if (calc_qty > qty_c02) calc_qty = qty_c02;
                     coin_02 <= calc_qty;
                     qty_c02 <= qty_c02 - calc_qty;
-                    calc_resto = calc_resto - (calc_qty * 2);
+                    calc_resto = calc_resto - (calc_qty * 6'd2);
 
                     // 4. Monete da 0.10 (1 decimo)
                     calc_qty = calc_resto; // Rimane solo questo
@@ -233,8 +235,8 @@ module vending_behavioral (
                     qty_c01 <= qty_c01 - calc_qty;
 
                     // Aggiornamento finale cassa e reset transazione
-                    disponibile <= disponibile - (credito - current_price);
-                    credito <= 0;
+                    disponibile <= disponibile - {4'd0, (credito - current_price)};
+                    credito <= 6'd0;
                     
                     // Torna in attesa
                     stato <= S_IDLE;

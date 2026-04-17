@@ -11,6 +11,8 @@ module testbench;
     reg [2:0] selezione;
     reg conferma;
     reg annulla;
+    integer cycle_count;
+    integer mismatch_count;
 
     // ==========================================
     // 2. OUTPUT DA CONFRONTARE
@@ -56,22 +58,42 @@ module testbench;
     // ==========================================
     always #5 clk = ~clk;
 
+    always @(posedge clk) begin
+        if (!rst) cycle_count <= 0;
+        else cycle_count <= cycle_count + 1;
+    end
+
+    task automatic fail_mismatch;
+        input [8*32-1:0] signal_name;
+        input [31:0] behavioral_value;
+        input [31:0] structural_value;
+    begin
+        mismatch_count = mismatch_count + 1;
+        $display(
+            "MISMATCH time=%0t cycle=%0d signal=%0s behavioral=%0d structural=%0d",
+            $time, cycle_count, signal_name, behavioral_value, structural_value
+        );
+        $fatal(1, "Comparison failed");
+    end
+    endtask
+
     // Check automatico ad ogni fronte di discesa (quando le uscite sono stabili)
     always @(negedge clk) begin
         if (rst) begin // Ignora durante il reset
-            if (credito_b !== credito_s) $display("ERRORE al tempo %t: Credito diverso! Beh:%d Str:%d", $time, credito_b, credito_s);
-            if (resto_b !== resto_s)     $display("ERRORE al tempo %t: Resto diverso! Beh:%d Str:%d", $time, resto_b, resto_s);
-            if (errore_b !== errore_s)   $display("ERRORE al tempo %t: Codice Errore diverso!", $time);
-            
-            // Verifica Prodotti
-            if ({p1_b, p2_b, p3_b, p4_b} !== {p1_s, p2_s, p3_s, p4_s}) 
-                $display("ERRORE al tempo %t: Erogazione Prodotto diversa!", $time);
+            if (credito_b !== credito_s) fail_mismatch("credito", {26'd0, credito_b}, {26'd0, credito_s});
+            if (resto_b !== resto_s)     fail_mismatch("resto", {26'd0, resto_b}, {26'd0, resto_s});
+            if (errore_b !== errore_s)   fail_mismatch("errore", {30'd0, errore_b}, {30'd0, errore_s});
+            if (disp_b !== disp_s)       fail_mismatch("disponibile", {22'd0, disp_b}, {22'd0, disp_s});
 
-            // Verifica Conteggio Monete Resto (Cruciale per Gruppo da 3)
-            if (c01_b !== c01_s) $display("ERRORE: Monete 0.10 diverse. Beh:%d Str:%d", c01_b, c01_s);
-            if (c02_b !== c02_s) $display("ERRORE: Monete 0.20 diverse. Beh:%d Str:%d", c02_b, c02_s);
-            if (c05_b !== c05_s) $display("ERRORE: Monete 0.50 diverse. Beh:%d Str:%d", c05_b, c05_s);
-            if (c10_b !== c10_s) $display("ERRORE: Monete 1.00 diverse. Beh:%d Str:%d", c10_b, c10_s);
+            if (p1_b !== p1_s) fail_mismatch("prodotto1", {31'd0, p1_b}, {31'd0, p1_s});
+            if (p2_b !== p2_s) fail_mismatch("prodotto2", {31'd0, p2_b}, {31'd0, p2_s});
+            if (p3_b !== p3_s) fail_mismatch("prodotto3", {31'd0, p3_b}, {31'd0, p3_s});
+            if (p4_b !== p4_s) fail_mismatch("prodotto4", {31'd0, p4_b}, {31'd0, p4_s});
+
+            if (c01_b !== c01_s) fail_mismatch("coin_01", {26'd0, c01_b}, {26'd0, c01_s});
+            if (c02_b !== c02_s) fail_mismatch("coin_02", {26'd0, c02_b}, {26'd0, c02_s});
+            if (c05_b !== c05_s) fail_mismatch("coin_05", {26'd0, c05_b}, {26'd0, c05_s});
+            if (c10_b !== c10_s) fail_mismatch("coin_10", {26'd0, c10_b}, {26'd0, c10_s});
         end
     end
 
@@ -84,6 +106,8 @@ module testbench;
 
         clk = 0; rst = 0;
         coin = 0; selezione = 0; conferma = 0; annulla = 0;
+        cycle_count = 0;
+        mismatch_count = 0;
 
         #20 rst = 1; // Rilascio Reset
 
@@ -136,7 +160,7 @@ module testbench;
         wait_clock; annulla = 0;
         #50;
 
-        $display("--- CONFRONTO TERMINATO: Se non vedi errori sopra, il test e' passato. ---");
+        $display("--- CONFRONTO TERMINATO: mismatch=%0d ---", mismatch_count);
         $finish;
     end
 

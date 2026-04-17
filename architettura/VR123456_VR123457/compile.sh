@@ -1,90 +1,57 @@
 #!/bin/bash
 
-# ============================================================
-# SCRIPT DI COMPILAZIONE E SIMULAZIONE
-# Specifiche di progetto [1], [2]
-# ============================================================
+set -euo pipefail
 
-# 1. Preparazione dell'ambiente
-echo "--- Pulizia e creazione cartella obj_dir ---"
-rm -rf obj_dir
+ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$ROOT_DIR"
+
+if [[ ! -f "behavioral/tb_behavioral.v" || ! -f "structural/tb_structural.v" || ! -f "testbench.v" ]]; then
+    echo "compile.sh must be run from the project root: $ROOT_DIR" >&2
+    exit 1
+fi
+
+run_build() {
+    local name="$1"
+    local top="$2"
+    local build_dir="$3"
+    local vcd_file="$4"
+    local label="$5"
+    shift 5
+
+    echo "$label"
+    rm -rf "$build_dir"
+    rm -f "$vcd_file"
+
+    verilator --trace --timing --binary "$@" \
+        --top-module "$top" \
+        --Mdir "$build_dir" \
+        -o "../$name"
+
+    "./obj_dir/$name"
+
+    if [[ ! -f "$vcd_file" ]]; then
+        echo "Missing expected VCD: $vcd_file" >&2
+        exit 1
+    fi
+}
+
 mkdir -p obj_dir
 
-# ============================================================
-# PARTE A: Modello BEHAVIORAL
-# ============================================================
-echo ""
-echo "--- Compilazione Modello Behavioral ---"
-# Compila il modulo e il testbench generando l'eseguibile in obj_dir/behavioral
-iverilog -o obj_dir/behavioral behavioral/vending_behavioral.v behavioral/tb_behavioral.v
+run_build "behavioral" "tb_behavioral" "obj_dir/behavioral.dir" "simulazione_behavioral.vcd" "[1/3] behavioral" \
+    behavioral/vending_behavioral.v \
+    behavioral/tb_behavioral.v
 
-if [ $? -eq 0 ]; then
-    echo "Compilazione Behavioral: SUCCESSO"
-    echo "--- Esecuzione Simulazione Behavioral ---"
-    # Esegue la simulazione
-    vvp obj_dir/behavioral
-    
-    echo "Generato file di tracce: simulazione_behavioral.vcd"
-else
-    echo "Compilazione Behavioral: FALLITA"
-    exit 1
-fi
+run_build "structural" "tb_structural" "obj_dir/structural.dir" "simulazione_structural.vcd" "[2/3] structural" \
+    structural/tb_structural.v \
+    structural/vending_structural.v \
+    structural/vending_fsm.v \
+    structural/GreedyLogic.v
 
-# ============================================================
-# PARTE B: Modello STRUCTURAL (Da scommentare in seguito)
-# ============================================================
-# echo ""
-# echo "--- Compilazione Modello Structural ---"
-# iverilog -o obj_dir/structural structural/vending_structural.v structural/tb_structural.v
-# vvp obj_dir/structural
+run_build "comparison" "testbench" "obj_dir/comparison.dir" "simulazione_comparison.vcd" "[3/3] comparison" \
+    testbench.v \
+    behavioral/vending_behavioral.v \
+    structural/vending_structural.v \
+    structural/vending_fsm.v \
+    structural/GreedyLogic.v
 
-# ============================================================
-# PARTE B: Modello STRUCTURAL
-# ============================================================
-echo ""
-echo "--- Compilazione Modello Structural ---"
-# Compiliamo il testbench, il top module strutturale E la macchina a stati
-# Nota: components.v è incluso con `include dentro vending_structural.v, quindi non va listato qui 
-# se no iverilog darebbe errore di "doppia definizione".
-iverilog -o obj_dir/structural structural/tb_structural.v structural/vending_structural.v structural/vending_fsm.v structural/GreedyLogic.v
-
-
-if [ $? -eq 0 ]; then
-    echo "Compilazione Structural: SUCCESSO"
-    echo "--- Esecuzione Simulazione Structural ---"
-    vvp obj_dir/structural
-    echo "Generato file di tracce: simulazione_structural.vcd"
-else
-    echo "Compilazione Structural: FALLITA"
-    exit 1
-fi
-
-
-# ============================================================
-# PARTE C: Confronto (COMPARISON) (Da scommentare in seguito)
-# ============================================================
-# echo ""
-# echo "--- Esecuzione Testbench di Confronto ---"
-# iverilog -o obj_dir/comparison testbench.v behavioral/vending_behavioral.v structural/vending_structural.v
-# vvp obj_dir/comparison
-
-# ============================================================
-# PARTE C: Confronto (COMPARISON)
-# ============================================================
-echo ""
-echo "--- Esecuzione Testbench di Confronto ---"
-# Compila testbench.v insieme ai sorgenti behavioral, structural e FSM
-iverilog -o obj_dir/comparison testbench.v behavioral/vending_behavioral.v structural/vending_structural.v structural/vending_fsm.v structural/GreedyLogic.v
-
-
-if [ $? -eq 0 ]; then
-    echo "Compilazione Comparison: SUCCESSO"
-    vvp obj_dir/comparison
-    echo "Generato file di tracce: simulazione_comparison.vcd"
-else
-    echo "Compilazione Comparison: FALLITA"
-    exit 1
-fi
-
-echo ""
-echo "=== FINE SIMULAZIONE ==="
+echo "done"
