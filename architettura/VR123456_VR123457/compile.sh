@@ -16,23 +16,35 @@ run_build() {
     local build_dir="$3"
     local vcd_file="$4"
     local label="$5"
+    local log_file
     shift 5
 
     echo "$label"
     rm -rf "$build_dir"
     rm -f "$vcd_file"
+    log_file="$(mktemp)"
 
-    verilator --trace --timing --binary "$@" \
+    if ! verilator --trace --timing --binary "$@" \
         --top-module "$top" \
         --Mdir "$build_dir" \
-        -o "../$name"
+        -o "../$name" >"$log_file" 2>&1; then
+        cat "$log_file"
+        rm -f "$log_file"
+        exit 1
+    fi
 
-    "./obj_dir/$name"
+    if ! "./obj_dir/$name"; then
+        rm -f "$log_file"
+        exit 1
+    fi
 
     if [[ ! -f "$vcd_file" ]]; then
+        rm -f "$log_file"
         echo "Missing expected VCD: $vcd_file" >&2
         exit 1
     fi
+
+    rm -f "$log_file"
 }
 
 mkdir -p obj_dir
