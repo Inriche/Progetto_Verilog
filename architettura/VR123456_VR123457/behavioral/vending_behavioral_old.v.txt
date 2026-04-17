@@ -1,0 +1,251 @@
+module vending_behavioral (
+    input clk,                  // Clock [4]
+    input rst,                  // Reset attivo basso [4]
+    input [2:0] coin,           // Inserimento moneta (0.1, 0.2, 0.5, 1.0) [4]
+    input [2:0] selezione,      // Selezione prodotto (1..4) [5]
+    input conferma,             // Conferma acquisto [5]
+    input annulla,              // Annulla acquisto [5]
+
+    output reg [5:0] credito,       // Credito corrente in decimi di Euro [6]
+    output reg prodotto1,           // Erogazione prodotto 1 [6]
+    output reg prodotto2,           // Erogazione prodotto 2 [6]
+    output reg prodotto3,           // Erogazione prodotto 3 [6]
+    output reg prodotto4,           // Erogazione prodotto 4 [6]
+    output reg [1:0] errore,        // Codice errore (00, 01, 10, 11) [6]
+    output reg [5:0] resto,         // Resto in decimi di Euro [7]
+    output reg [9:0] disponibile    // Totale soldi nella macchina [7]
+    
+    // NOTA: Se siete un gruppo da 3, qui vanno aggiunte le uscite 
+    // coin_01, coin_02, etc. come specificato in [7].
+
+); //<--chiusura port list
+
+
+module vending_behavioral  (=============>>>>>>>gruppo da 3 persone
+    input clk,
+    input rst,
+    input [2:0] coin,
+    input [2:0] selezione,
+    input conferma,
+    input annulla,
+
+    output reg [5:0] credito,
+    output reg prodotto1, prodotto2, prodotto3, prodotto4,
+    output reg [1:0] errore,
+    output reg [5:0] resto,         // Valore totale del resto
+    output reg [9:0] disponibile,
+    
+    // OUTPUT AGGIUNTIVI (Gruppo da 3) [1]
+    output reg [5:0] coin_01, // Numero monete da 0.10 erogate
+    output reg [5:0] coin_02, // Numero monete da 0.20 erogate
+    output reg [5:0] coin_05, // Numero monete da 0.50 erogate
+    output reg [5:0] coin_10  // Numero monete da 1.00 erogate
+);
+
+
+    // ==========================================
+    // STATI DELLA FSM
+    // ==========================================
+    parameter [1:0] 
+        S_INIT      = 2'b00,  // Fase di configurazione iniziale
+        S_IDLE      = 2'b01,  // Attesa cliente
+        S_OPERATIVA = 2'b10,  // Gestione monete e selezione
+        S_EROGAZIONE= 2'b11;  // Erogazione prodotto/resto
+
+    reg [1:0] stato;          // Registro di stato corrente
+
+    // ==========================================
+    // MEMORIA INTERNA (Prezzi e Quantità)
+    // ==========================================
+    // Quantità Prodotti
+    reg [5:0] qty_p1, qty_p2, qty_p3, qty_p4;
+    
+    // Prezzi Prodotti (in decimi di euro)
+    reg [5:0] price_p1, price_p2, price_p3, price_p4;
+    
+    // Quantità Monete per il resto (0.1, 0.2, 0.5, 1.0)
+    reg [5:0] qty_c01, qty_c02, qty_c05, qty_c10;
+
+    // Contatore per i 12 cicli di inizializzazione
+    reg [3:0] init_counter; 
+
+
+
+
+    // ==========================================
+    // LOGICA SEQUENZIALE: FSM + INIZIALIZZAZIONE
+    // ==========================================
+    always @(posedge clk or negedge rst) begin
+        if (!rst) begin
+            // RESET ASINCRONO (Attivo basso) [3]
+            stato <= S_INIT;
+            init_counter <= 4'd0;
+            
+            // Azzero uscite principali per sicurezza
+            credito <= 6'd0;
+            errore <= 2'b00;
+            prodotto1 <= 0; prodotto2 <= 0; prodotto3 <= 0; prodotto4 <= 0;
+            // ... (altri reset se necessari)
+        end 
+        else begin
+            case (stato)
+                // --------------------------------------------------
+                // FASE DI INIZIALIZZAZIONE (Primi 12 cicli) [1, 2]
+                // --------------------------------------------------
+                S_INIT: begin
+                    // Interpretiamo l'input combinato coin (MSB) e selezione (LSB)
+                    // Nota: init_counter va da 0 a 11 (totale 12 cicli)
+                    
+                    case (init_counter)
+                        4'd0:  qty_p1    <= {coin, selezione}; // 1° ciclo: Qty Prod 1
+                        4'd1:  price_p1  <= {coin, selezione}; // 2° ciclo: Prezzo Prod 1
+                        4'd2:  qty_p2    <= {coin, selezione}; // 3° ciclo: Qty Prod 2
+                        4'd3:  price_p2  <= {coin, selezione}; // 4° ciclo: Prezzo Prod 2
+                        4'd4:  qty_p3    <= {coin, selezione}; // 5° ciclo: Qty Prod 3
+                        4'd5:  price_p3  <= {coin, selezione}; // 6° ciclo: Prezzo Prod 3
+                        4'd6:  qty_p4    <= {coin, selezione}; // 7° ciclo: Qty Prod 4
+                        4'd7:  price_p4  <= {coin, selezione}; // 8° ciclo: Prezzo Prod 4
+                        4'd8:  qty_c01   <= {coin, selezione}; // 9° ciclo: Monete 0.1€
+                        4'd9:  qty_c02   <= {coin, selezione}; // 10° ciclo: Monete 0.2€
+                        4'd10: qty_c05   <= {coin, selezione}; // 11° ciclo: Monete 0.5€
+                        4'd11: begin                           // 12° ciclo: Monete 1.0€
+                               qty_c10   <= {coin, selezione};
+                               
+                               // Fine inizializzazione -> Passa a stato IDLE
+                               stato <= S_IDLE; 
+                               init_counter <= 4'd0; // Reset contatore per pulizia
+                        end
+                    endcase
+                    
+                    // Incremento il contatore se non sono all'ultimo passo
+                    if (init_counter < 4'd11) begin
+                        init_counter <= init_counter + 1;
+                    end
+                end
+
+                // --------------------------------------------------
+                // ALTRI STATI (Da implementare nel prossimo step)
+                // --------------------------------------------------
+                S_IDLE: begin
+                    // Qui gestiremo l'attesa dell'inserimento moneta
+                end
+                
+                // ...
+            endcase
+        end
+    end
+
+
+
+
+// --------------------------------------------------
+                // STATO DI ATTESA (IDLE)
+                // --------------------------------------------------
+                S_IDLE: begin
+                    // Reset delle uscite temporanee
+                    prodotto1 <= 0; prodotto2 <= 0; prodotto3 <= 0; prodotto4 <= 0;
+                    errore <= 2'b00;
+                    resto <= 6'd0;
+                    
+                    // Se viene inserita una moneta, inizia la transazione
+                    if (coin != 3'b000) begin
+                        stato <= S_OPERATIVA;
+                        // Decodifica immediata della prima moneta
+                        case (coin)
+                            3'b100: begin credito <= credito + 6'd1;  disponibile <= disponibile + 10'd1;  end // 0.10
+                            3'b101: begin credito <= credito + 6'd2;  disponibile <= disponibile + 10'd2;  end // 0.20
+                            3'b110: begin credito <= credito + 6'd5;  disponibile <= disponibile + 10'd5;  end // 0.50
+                            3'b111: begin credito <= credito + 6'd10; disponibile <= disponibile + 10'd10; end // 1.00
+                        endcase
+                    end
+                    // Nota: Se premi annulla in IDLE non succede nulla perché il credito è 0
+                end
+
+                // --------------------------------------------------
+                // STATO OPERATIVO (Accumulo e Selezione)
+                // --------------------------------------------------
+                S_OPERATIVA: begin
+                    // 1. GESTIONE AGGIUNTA MONETE
+                    if (coin != 3'b000) begin
+                        case (coin)
+                            3'b100: begin credito <= credito + 6'd1;  disponibile <= disponibile + 10'd1;  end
+                            3'b101: begin credito <= credito + 6'd2;  disponibile <= disponibile + 10'd2;  end
+                            3'b110: begin credito <= credito + 6'd5;  disponibile <= disponibile + 10'd5;  end
+                            3'b111: begin credito <= credito + 6'd10; disponibile <= disponibile + 10'd10; end
+                        endcase
+                    end
+
+                    // 2. GESTIONE ANNULLAMENTO
+                    else if (annulla) begin
+                        // Restituisce tutto il credito inserito
+                        resto <= credito;
+                        credito <= 0;
+                        disponibile <= disponibile - credito; // Togliamo i soldi dal totale macchina
+                        stato <= S_IDLE; // Torna all'inizio
+                    end
+
+                    // 3. GESTIONE CONFERMA ACQUISTO
+                    else if (conferma) begin
+                        // Al fronte di clock in cui "conferma" è alto, controlliamo la selezione
+                        // Dobbiamo verificare due cose: Prezzo e Disponibilità (Stock)
+                        
+                        // Variabili temporanee per semplificare i check (logica combinatoria interna al processo)
+                        // In Verilog comportamentale possiamo usare variabili 'reg' temporanee o if annidati
+                        
+                        case (selezione)
+                            3'b100: begin // PRODOTTO 1
+                                // Codifica Errore: Bit 1 = Stock esaurito, Bit 0 = Credito insufficiente [4]
+                                if (credito < price_p1 || qty_p1 == 0) begin
+                                    errore <= (credito < price_p1); // Credito insufficiente
+                                    errore[5] <= (qty_p1 == 0);        // Prodotto esaurito
+                                    // Se credito insufficiente, la porta deve indicare il prezzo [2]
+                                    if (credito < price_p1) resto <= price_p1; 
+                                    stato <= S_IDLE; // O rimanere in OPERATIVA? La specifica non è esplicita, ma di solito resetta l'errore dopo un po'.
+                                                     // Assumiamo che l'errore duri un ciclo e si torni in IDLE o si resti qui.
+                                                     // Per semplicità torniamo a IDLE resettando la transazione (o gestiscilo come preferisci)
+                                end else begin
+                                    // TUTTO OK -> EROGAZIONE
+                                    stato <= S_EROGAZIONE;
+                                end
+                            end
+                            
+                            3'b101: begin // PRODOTTO 2
+                                if (credito < price_p2 || qty_p2 == 0) begin
+                                    errore <= (credito < price_p2);
+                                    errore[5] <= (qty_p2 == 0);
+                                    if (credito < price_p2) resto <= price_p2;
+                                end else stato <= S_EROGAZIONE;
+                            end
+
+                            3'b110: begin // PRODOTTO 3
+                                if (credito < price_p3 || qty_p3 == 0) begin
+                                    errore <= (credito < price_p3);
+                                    errore[5] <= (qty_p3 == 0);
+                                    if (credito < price_p3) resto <= price_p3;
+                                end else stato <= S_EROGAZIONE;
+                            end
+
+                            3'b111: begin // PRODOTTO 4
+                                if (credito < price_p4 || qty_p4 == 0) begin
+                                    errore <= (credito < price_p4);
+                                    errore[5] <= (qty_p4 == 0);
+                                    if (credito < price_p4) resto <= price_p4;
+                                end else stato <= S_EROGAZIONE;
+                            end
+                            
+                            default: begin
+                                // Selezione non valida (nessun prodotto selezionato o codice errato)
+                                // La specifica dice "Fornire errore se selezione non valida" [6]
+                                // Usiamo un codice errore custom o non facciamo nulla? 
+                                // Solitamente si ignora o si resta in attesa.
+                            end
+                        endcase
+                    end
+                end
+
+
+
+
+    // QUI ANDRÀ LA TUA LOGICA
+
+endmodule

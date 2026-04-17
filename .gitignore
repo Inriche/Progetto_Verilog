@@ -1,0 +1,12 @@
+cat > .gitignore <<'EOF'
+obj_dir/
+*.vcd
+*.o
+*.out
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+*.log
+EOF
