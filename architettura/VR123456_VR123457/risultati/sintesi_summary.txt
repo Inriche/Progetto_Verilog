@@ -1,0 +1,66 @@
+=== YOSYS VERSION ===
+Yosys 0.33 (git sha1 2584903a060)
+
+=== BEHAVIORAL SYNTHESIS SUMMARY ===
+=== vending_behavioral ===
+
+   Number of wires:               1327
+   Number of wire bits:           1526
+   Number of public wires:          33
+   Number of public wire bits:     146
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1510
+     $_AND_                        310
+     $_DFFE_PN0P_                   58
+     $_DFFE_PP_                     78
+     $_NAND_                       641
+     $_NOR_                         45
+     $_NOT_                         63
+     $_OR_                         203
+     $_XNOR_                        79
+     $_XOR_                         33
+
+13. Executing Verilog backend.
+
+13.1. Executing BMUXMAP pass.
+
+13.2. Executing DEMUXMAP pass.
+Dumping module `\vending_behavioral'.
+
+End of script. Logfile hash: 49aff7580f, CPU: user 5.72s system 0.38s, MEM: 400.49 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 49% 1x techmap (3 sec), 16% 1x abc (1 sec), ...
+
+=== STRUCTURAL SYNTHESIS SUMMARY ===
+=== vending_structural ===
+
+   Number of wires:               1333
+   Number of wire bits:           1986
+   Number of public wires:         258
+   Number of public wire bits:     908
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1360
+     $_AND_                        215
+     $_DFFE_PN0P_                  134
+     $_DFF_PN0_                      2
+     $_NAND_                       639
+     $_NOR_                         49
+     $_NOT_                         52
+     $_OR_                         159
+     $_XNOR_                        78
+     $_XOR_                         32
+
+16. Executing Verilog backend.
+
+16.1. Executing BMUXMAP pass.
+
+16.2. Executing DEMUXMAP pass.
+Dumping module `\vending_structural'.
+
+End of script. Logfile hash: 168808af1c, CPU: user 0.69s system 0.04s, MEM: 49.06 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 32% 1x abc (0 sec), 26% 1x techmap (0 sec), ...
