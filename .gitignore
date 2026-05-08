@@ -1,12 +1,10 @@
-cat > .gitignore <<'EOF'
-obj_dir/
-*.vcd
-*.o
-*.out
-.vscode/
-.idea/
-*.swp
-Thumbs.db
+**/obj_dir/
+**/*.vcd
+**/*.fst
+**/*.vvp
+*.zip
+*.tar.gz
+architettura/*.zip
+architettura/*.tar.gz
 .DS_Store
-*.log
-EOF
+.vscode/
