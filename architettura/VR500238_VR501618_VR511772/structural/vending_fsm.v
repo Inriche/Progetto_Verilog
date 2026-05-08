@@ -46,6 +46,13 @@ module vending_fsm (
 
     reg [1:0] stato, next_stato;
 
+    // Selezioni valide: 100, 101, 110, 111.
+    // Le selezioni 001, 010, 011 sono invalide e non devono causare erogazione.
+    wire valid_sel = (selezione == 3'b100) ||
+                     (selezione == 3'b101) ||
+                     (selezione == 3'b110) ||
+                     (selezione == 3'b111);
+
     // sequenziale stato + init counter
     always @(posedge clk or negedge rst) begin
         if (!rst) begin
@@ -64,7 +71,7 @@ module vending_fsm (
     always @(posedge clk or negedge rst) begin
         if (!rst) begin
             sel_latched <= 3'b000;
-        end else if (conferma) begin
+        end else if (conferma && valid_sel) begin
             sel_latched <= selezione;
         end
     end
@@ -119,8 +126,13 @@ module vending_fsm (
                     next_stato = S_IDLE;
                 end
                 else if (conferma) begin
-                    // decide in base ai flag del datapath (valutati con selezione corrente)
-                    if (is_credito_suff && is_stock_ok) begin
+                    // decide in base ai flag del datapath solo se la selezione è valida.
+                    // Con selezione invalida si imita il behavioral: nessuna erogazione,
+                    // nessun azzeramento credito, nessun aggiornamento disponibile/resto.
+                    if (!valid_sel) begin
+                        next_stato = S_IDLE;
+                    end
+                    else if (is_credito_suff && is_stock_ok) begin
                         do_ok = 1'b1;       // impulso prodotto + dec stock + latch prezzo
                         case (selezione)
                             3'b100: prodotto1 = 1'b1;
