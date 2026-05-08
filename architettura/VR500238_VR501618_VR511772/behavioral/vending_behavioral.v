@@ -192,7 +192,15 @@ module vending_behavioral (
                                     stato <= S_EROGAZIONE;
                                 end
                             end
-                            default: stato <= S_IDLE; // Selezione non valida
+                            3'b001,
+                            3'b010,
+                            3'b011: begin
+                                errore <= 2'b10;
+                                stato <= S_IDLE;
+                            end
+                            default: begin
+                                stato <= S_IDLE;
+                            end
                         endcase
                     end
                 end

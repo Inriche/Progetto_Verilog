@@ -127,6 +127,11 @@ module vending_structural (
     // =========================
     // SELEZIONE -> indice per Mux4 (100..111 -> 00..11)
     // =========================
+    wire valid_sel = (selezione == 3'b100) ||
+                     (selezione == 3'b101) ||
+                     (selezione == 3'b110) ||
+                     (selezione == 3'b111);
+
     wire [1:0] sel_idx = selezione[1:0];
 
     // Prezzo e qty correnti (da mux strutturali)
@@ -137,8 +142,10 @@ module vending_structural (
     Mux4 #(6) mux_qty   (qty_p1_q,   qty_p2_q,   qty_p3_q,   qty_p4_q,   sel_idx, sel_qty);
 
     // Flags per FSM (structural-friendly)
-    ComparatoreGE #(6) cmp_credito (credito_q, sel_price, is_credito_suff);
-    assign is_stock_ok = (sel_qty != 6'd0);
+    wire credito_ge_selprice;
+    ComparatoreGE #(6) cmp_credito (credito_q, sel_price, credito_ge_selprice);
+    assign is_credito_suff = valid_sel && credito_ge_selprice;
+    assign is_stock_ok = valid_sel && (sel_qty != 6'd0);
 
     // =========================
     // DATAPATH: calcoli combinatori con componenti
@@ -277,13 +284,13 @@ module vending_structural (
     wire we_prod = clear_outputs | do_ok;
 
     // ERRORE: set su do_err, clear in IDLE
-    wire [1:0] err_calc = { (sel_qty == 6'd0), (credito_q < sel_price) };
+    wire [1:0] err_calc = valid_sel ? { (sel_qty == 6'd0), (credito_q < sel_price) } : 2'b10;
     wire [1:0] errore_d = clear_outputs ? 2'b00 : (do_err ? err_calc : errore_q);
     wire we_errore = clear_outputs | do_err;
 
     // RESTO: do_cancel -> credito, do_err (credito insuff) -> prezzo, do_erogazione -> change, clear in IDLE
     wire [5:0] resto_from_cancel = credito_q;
-    wire [5:0] resto_from_err    = sel_price;
+    wire [5:0] resto_from_err = err_calc[0] ? sel_price : 6'd0;
     wire [5:0] resto_from_erog   = change6;
 
     wire credito_insuff = (credito_q < sel_price);

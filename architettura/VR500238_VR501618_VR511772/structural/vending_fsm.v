@@ -130,6 +130,7 @@ module vending_fsm (
                     // Con selezione invalida si imita il behavioral: nessuna erogazione,
                     // nessun azzeramento credito, nessun aggiornamento disponibile/resto.
                     if (!valid_sel) begin
+                        do_err    = 1'b1;
                         next_stato = S_IDLE;
                     end
                     else if (is_credito_suff && is_stock_ok) begin
@@ -156,6 +157,10 @@ module vending_fsm (
                 // Nel behavioral: qui calcoli greedy, resto, aggiorni monete/disponibile, credito=0 e torni IDLE.
                 do_erogazione = 1'b1;
                 next_stato = S_IDLE;
+            end
+
+            default: begin
+                next_stato = S_INIT;
             end
         endcase
     end
