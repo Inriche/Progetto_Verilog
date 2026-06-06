@@ -1,2 +1,0 @@
-Warning: Regarding the user-specified fsm_encoding attribute on vending_fsm.stato:
-    FSM seems to be self-resetting. Possible simulation-synthesis mismatch!
