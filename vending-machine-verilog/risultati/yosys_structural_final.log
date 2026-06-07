@@ -1,0 +1,1519 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `
+read_verilog structural/vending_fsm.v structural/vending_structural.v
+hierarchy -top vending_structural
+proc
+opt
+fsm
+opt
+techmap
+abc
+opt
+stat
+write_verilog risultati/vending_structural_synth.v
+' --
+
+1. Executing Verilog-2005 frontend: structural/vending_fsm.v
+Parsing Verilog input from `structural/vending_fsm.v' to AST representation.
+Generating RTLIL representation for module `\vending_fsm'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: structural/vending_structural.v
+Parsing Verilog input from `structural/vending_structural.v' to AST representation.
+Generating RTLIL representation for module `\RegistroPP'.
+Generating RTLIL representation for module `\Sommatore'.
+Generating RTLIL representation for module `\Sottrattore'.
+Generating RTLIL representation for module `\ComparatoreGE'.
+Generating RTLIL representation for module `\ComparatoreEQ'.
+Generating RTLIL representation for module `\Mux2'.
+Generating RTLIL representation for module `\Mux4'.
+Generating RTLIL representation for module `\vending_structural'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \vending_structural
+Used module:     \RegistroPP
+Used module:     \vending_fsm
+Used module:     \ComparatoreGE
+Used module:     \Mux4
+Parameter 1 (\N) = 6
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\RegistroPP'.
+Parameter 1 (\N) = 6
+Generating RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 1
+
+3.3. Executing AST frontend in derive mode using pre-parsed AST for module `\RegistroPP'.
+Parameter 1 (\N) = 1
+Generating RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Parameter 1 (\N) = 1
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Parameter 1 (\N) = 1
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Parameter 1 (\N) = 1
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 2
+
+3.4. Executing AST frontend in derive mode using pre-parsed AST for module `\RegistroPP'.
+Parameter 1 (\N) = 2
+Generating RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Parameter 1 (\N) = 10
+
+3.5. Executing AST frontend in derive mode using pre-parsed AST for module `\RegistroPP'.
+Parameter 1 (\N) = 10
+Generating RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+
+3.6. Executing AST frontend in derive mode using pre-parsed AST for module `\ComparatoreGE'.
+Parameter 1 (\N) = 6
+Generating RTLIL representation for module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+
+3.7. Executing AST frontend in derive mode using pre-parsed AST for module `\Mux4'.
+Parameter 1 (\N) = 6
+Generating RTLIL representation for module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Parameter 1 (\N) = 6
+Found cached RTLIL representation for module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+
+3.8. Analyzing design hierarchy..
+Top module:  \vending_structural
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000000110
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000000001
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000000010
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000001010
+Used module:     \vending_fsm
+Used module:     $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110
+Used module:     $paramod\Mux4\N=s32'00000000000000000000000000000110
+
+3.9. Analyzing design hierarchy..
+Top module:  \vending_structural
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000000110
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000000001
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000000010
+Used module:     $paramod\RegistroPP\N=s32'00000000000000000000000000001010
+Used module:     \vending_fsm
+Used module:     $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110
+Used module:     $paramod\Mux4\N=s32'00000000000000000000000000000110
+Removing unused module `\Mux4'.
+Removing unused module `\Mux2'.
+Removing unused module `\ComparatoreEQ'.
+Removing unused module `\ComparatoreGE'.
+Removing unused module `\Sottrattore'.
+Removing unused module `\Sommatore'.
+Removing unused module `\RegistroPP'.
+Removed 7 unused modules.
+Mapping positional arguments of cell vending_structural.cmp_credito ($paramod\ComparatoreGE\N=s32'00000000000000000000000000000110).
+Mapping positional arguments of cell vending_structural.mux_qty ($paramod\Mux4\N=s32'00000000000000000000000000000110).
+Mapping positional arguments of cell vending_structural.mux_price ($paramod\Mux4\N=s32'00000000000000000000000000000110).
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed 1 dead cases from process $proc$structural/components.v:72$205 in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Marked 1 switch rules as full_case in process $proc$structural/components.v:72$205 in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Marked 1 switch rules as full_case in process $proc$structural/components.v:13$202 in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Marked 1 switch rules as full_case in process $proc$structural/components.v:13$200 in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Marked 1 switch rules as full_case in process $proc$structural/components.v:13$198 in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Marked 1 switch rules as full_case in process $proc$structural/components.v:13$196 in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Marked 1 switch rules as full_case in process $proc$structural/vending_structural.v:163$55 in module vending_structural.
+Removed 1 dead cases from process $proc$structural/vending_fsm.v:80$16 in module vending_fsm.
+Marked 10 switch rules as full_case in process $proc$structural/vending_fsm.v:80$16 in module vending_fsm.
+Marked 1 switch rules as full_case in process $proc$structural/vending_fsm.v:71$13 in module vending_fsm.
+Marked 2 switch rules as full_case in process $proc$structural/vending_fsm.v:57$8 in module vending_fsm.
+Removed a total of 2 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 14 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst in `$paramod\RegistroPP\N=s32'00000000000000000000000000001010.$proc$structural/components.v:13$202'.
+Found async reset \rst in `$paramod\RegistroPP\N=s32'00000000000000000000000000000010.$proc$structural/components.v:13$200'.
+Found async reset \rst in `$paramod\RegistroPP\N=s32'00000000000000000000000000000001.$proc$structural/components.v:13$198'.
+Found async reset \rst in `$paramod\RegistroPP\N=s32'00000000000000000000000000000110.$proc$structural/components.v:13$196'.
+Found async reset \rst in `\vending_fsm.$proc$structural/vending_fsm.v:71$13'.
+Found async reset \rst in `\vending_fsm.$proc$structural/vending_fsm.v:57$8'.
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~19 debug messages>
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\Mux4\N=s32'00000000000000000000000000000110.$proc$structural/components.v:72$205'.
+     1/1: $1\O[5:0]
+Creating decoders for process `$paramod\RegistroPP\N=s32'00000000000000000000000000001010.$proc$structural/components.v:13$202'.
+     1/1: $0\Q[9:0]
+Creating decoders for process `$paramod\RegistroPP\N=s32'00000000000000000000000000000010.$proc$structural/components.v:13$200'.
+     1/1: $0\Q[1:0]
+Creating decoders for process `$paramod\RegistroPP\N=s32'00000000000000000000000000000001.$proc$structural/components.v:13$198'.
+     1/1: $0\Q[0:0]
+Creating decoders for process `$paramod\RegistroPP\N=s32'00000000000000000000000000000110.$proc$structural/components.v:13$196'.
+     1/1: $0\Q[5:0]
+Creating decoders for process `\vending_structural.$proc$structural/vending_structural.v:163$55'.
+     1/1: $1\coin_value[5:0]
+Creating decoders for process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+     1/60: $7\prodotto1[0:0]
+     2/60: $7\prodotto4[0:0]
+     3/60: $7\prodotto3[0:0]
+     4/60: $7\prodotto2[0:0]
+     5/60: $9\next_stato[1:0]
+     6/60: $6\prodotto4[0:0]
+     7/60: $6\prodotto3[0:0]
+     8/60: $6\prodotto2[0:0]
+     9/60: $6\prodotto1[0:0]
+    10/60: $6\do_ok[0:0]
+    11/60: $6\do_err[0:0]
+    12/60: $8\next_stato[1:0]
+    13/60: $5\do_err[0:0]
+    14/60: $5\prodotto4[0:0]
+    15/60: $5\prodotto3[0:0]
+    16/60: $5\prodotto2[0:0]
+    17/60: $5\prodotto1[0:0]
+    18/60: $5\do_ok[0:0]
+    19/60: $7\next_stato[1:0]
+    20/60: $4\prodotto4[0:0]
+    21/60: $4\prodotto3[0:0]
+    22/60: $4\prodotto2[0:0]
+    23/60: $4\prodotto1[0:0]
+    24/60: $4\do_ok[0:0]
+    25/60: $4\do_err[0:0]
+    26/60: $6\next_stato[1:0]
+    27/60: $5\do_add_coin[0:0]
+    28/60: $3\prodotto4[0:0]
+    29/60: $3\prodotto3[0:0]
+    30/60: $3\prodotto2[0:0]
+    31/60: $3\prodotto1[0:0]
+    32/60: $3\do_ok[0:0]
+    33/60: $3\do_err[0:0]
+    34/60: $5\next_stato[1:0]
+    35/60: $3\do_cancel[0:0]
+    36/60: $2\prodotto4[0:0]
+    37/60: $2\prodotto3[0:0]
+    38/60: $2\prodotto2[0:0]
+    39/60: $2\prodotto1[0:0]
+    40/60: $2\do_ok[0:0]
+    41/60: $2\do_err[0:0]
+    42/60: $4\do_add_coin[0:0]
+    43/60: $4\next_stato[1:0]
+    44/60: $3\do_add_coin[0:0]
+    45/60: $3\next_stato[1:0]
+    46/60: $2\do_cancel[0:0]
+    47/60: $2\do_add_coin[0:0]
+    48/60: $2\next_stato[1:0]
+    49/60: $1\next_stato[1:0]
+    50/60: $1\mode_init[0:0]
+    51/60: $1\prodotto4[0:0]
+    52/60: $1\prodotto3[0:0]
+    53/60: $1\prodotto2[0:0]
+    54/60: $1\prodotto1[0:0]
+    55/60: $1\do_erogazione[0:0]
+    56/60: $1\do_ok[0:0]
+    57/60: $1\do_err[0:0]
+    58/60: $1\do_cancel[0:0]
+    59/60: $1\do_add_coin[0:0]
+    60/60: $1\clear_outputs[0:0]
+Creating decoders for process `\vending_fsm.$proc$structural/vending_fsm.v:71$13'.
+     1/1: $0\sel_latched[2:0]
+Creating decoders for process `\vending_fsm.$proc$structural/vending_fsm.v:57$8'.
+     1/2: $0\stato[1:0]
+     2/2: $0\init_counter[3:0]
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\Mux4\N=s32'00000000000000000000000000000110.\O' from process `$paramod\Mux4\N=s32'00000000000000000000000000000110.$proc$structural/components.v:72$205'.
+No latch inferred for signal `\vending_structural.\coin_value' from process `\vending_structural.$proc$structural/vending_structural.v:163$55'.
+No latch inferred for signal `\vending_fsm.\mode_init' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\clear_outputs' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\do_add_coin' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\do_cancel' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\do_err' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\do_ok' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\do_erogazione' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\prodotto1' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\prodotto2' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\prodotto3' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\prodotto4' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+No latch inferred for signal `\vending_fsm.\next_stato' from process `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\RegistroPP\N=s32'00000000000000000000000000001010.\Q' using process `$paramod\RegistroPP\N=s32'00000000000000000000000000001010.$proc$structural/components.v:13$202'.
+  created $adff cell `$procdff$872' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\RegistroPP\N=s32'00000000000000000000000000000010.\Q' using process `$paramod\RegistroPP\N=s32'00000000000000000000000000000010.$proc$structural/components.v:13$200'.
+  created $adff cell `$procdff$873' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\RegistroPP\N=s32'00000000000000000000000000000001.\Q' using process `$paramod\RegistroPP\N=s32'00000000000000000000000000000001.$proc$structural/components.v:13$198'.
+  created $adff cell `$procdff$874' with positive edge clock and negative level reset.
+Creating register for signal `$paramod\RegistroPP\N=s32'00000000000000000000000000000110.\Q' using process `$paramod\RegistroPP\N=s32'00000000000000000000000000000110.$proc$structural/components.v:13$196'.
+  created $adff cell `$procdff$875' with positive edge clock and negative level reset.
+Creating register for signal `\vending_fsm.\sel_latched' using process `\vending_fsm.$proc$structural/vending_fsm.v:71$13'.
+  created $adff cell `$procdff$876' with positive edge clock and negative level reset.
+Creating register for signal `\vending_fsm.\init_counter' using process `\vending_fsm.$proc$structural/vending_fsm.v:57$8'.
+  created $adff cell `$procdff$877' with positive edge clock and negative level reset.
+Creating register for signal `\vending_fsm.\stato' using process `\vending_fsm.$proc$structural/vending_fsm.v:57$8'.
+  created $adff cell `$procdff$878' with positive edge clock and negative level reset.
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `$paramod\Mux4\N=s32'00000000000000000000000000000110.$proc$structural/components.v:72$205'.
+Removing empty process `$paramod\Mux4\N=s32'00000000000000000000000000000110.$proc$structural/components.v:72$205'.
+Found and cleaned up 1 empty switch in `$paramod\RegistroPP\N=s32'00000000000000000000000000001010.$proc$structural/components.v:13$202'.
+Removing empty process `$paramod\RegistroPP\N=s32'00000000000000000000000000001010.$proc$structural/components.v:13$202'.
+Found and cleaned up 1 empty switch in `$paramod\RegistroPP\N=s32'00000000000000000000000000000010.$proc$structural/components.v:13$200'.
+Removing empty process `$paramod\RegistroPP\N=s32'00000000000000000000000000000010.$proc$structural/components.v:13$200'.
+Found and cleaned up 1 empty switch in `$paramod\RegistroPP\N=s32'00000000000000000000000000000001.$proc$structural/components.v:13$198'.
+Removing empty process `$paramod\RegistroPP\N=s32'00000000000000000000000000000001.$proc$structural/components.v:13$198'.
+Found and cleaned up 1 empty switch in `$paramod\RegistroPP\N=s32'00000000000000000000000000000110.$proc$structural/components.v:13$196'.
+Removing empty process `$paramod\RegistroPP\N=s32'00000000000000000000000000000110.$proc$structural/components.v:13$196'.
+Found and cleaned up 1 empty switch in `\vending_structural.$proc$structural/vending_structural.v:163$55'.
+Removing empty process `vending_structural.$proc$structural/vending_structural.v:163$55'.
+Found and cleaned up 10 empty switches in `\vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+Removing empty process `vending_fsm.$proc$structural/vending_fsm.v:80$16'.
+Found and cleaned up 1 empty switch in `\vending_fsm.$proc$structural/vending_fsm.v:71$13'.
+Removing empty process `vending_fsm.$proc$structural/vending_fsm.v:71$13'.
+Found and cleaned up 2 empty switches in `\vending_fsm.$proc$structural/vending_fsm.v:57$8'.
+Removing empty process `vending_fsm.$proc$structural/vending_fsm.v:57$8'.
+Cleaned up 19 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+<suppressed ~1 debug messages>
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module vending_structural.
+<suppressed ~6 debug messages>
+Optimizing module vending_fsm.
+<suppressed ~34 debug messages>
+
+5. Executing OPT pass (performing simple optimizations).
+
+5.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module vending_structural.
+<suppressed ~3 debug messages>
+Optimizing module vending_fsm.
+
+5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `\vending_structural'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `\vending_fsm'.
+<suppressed ~297 debug messages>
+Removed a total of 108 cells.
+
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vending_structural..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vending_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$724.
+    dead port 2/2 on $mux $procmux$718.
+    dead port 2/2 on $mux $procmux$712.
+    dead port 2/2 on $mux $procmux$706.
+    dead port 2/2 on $mux $procmux$700.
+    dead port 1/2 on $mux $procmux$698.
+    dead port 2/2 on $mux $procmux$691.
+    dead port 1/2 on $mux $procmux$689.
+    dead port 2/2 on $mux $procmux$682.
+    dead port 1/2 on $mux $procmux$680.
+    dead port 2/2 on $mux $procmux$673.
+    dead port 1/2 on $mux $procmux$671.
+    dead port 2/2 on $mux $procmux$664.
+    dead port 1/2 on $mux $procmux$662.
+    dead port 2/2 on $mux $procmux$655.
+    dead port 1/2 on $mux $procmux$653.
+    dead port 2/2 on $mux $procmux$646.
+    dead port 1/2 on $mux $procmux$644.
+    dead port 2/2 on $mux $procmux$637.
+    dead port 2/2 on $mux $procmux$803.
+    dead port 1/2 on $mux $procmux$635.
+    dead port 2/2 on $mux $procmux$628.
+    dead port 1/2 on $mux $procmux$626.
+    dead port 1/2 on $mux $procmux$623.
+    dead port 2/2 on $mux $procmux$616.
+    dead port 1/2 on $mux $procmux$614.
+    dead port 1/2 on $mux $procmux$611.
+    dead port 2/2 on $mux $procmux$604.
+    dead port 2/2 on $mux $procmux$795.
+    dead port 1/2 on $mux $procmux$602.
+    dead port 1/2 on $mux $procmux$599.
+    dead port 2/2 on $mux $procmux$592.
+    dead port 1/2 on $mux $procmux$590.
+    dead port 1/2 on $mux $procmux$587.
+    dead port 2/2 on $mux $procmux$580.
+    dead port 1/2 on $mux $procmux$578.
+    dead port 1/2 on $mux $procmux$575.
+    dead port 2/2 on $mux $procmux$568.
+    dead port 2/2 on $mux $procmux$788.
+    dead port 1/2 on $mux $procmux$566.
+    dead port 1/2 on $mux $procmux$563.
+    dead port 2/2 on $mux $procmux$556.
+    dead port 1/2 on $mux $procmux$554.
+    dead port 1/2 on $mux $procmux$551.
+    dead port 2/2 on $mux $procmux$544.
+    dead port 1/2 on $mux $procmux$542.
+    dead port 1/2 on $mux $procmux$539.
+    dead port 2/2 on $mux $procmux$536.
+    dead port 2/2 on $mux $procmux$529.
+    dead port 2/2 on $mux $procmux$781.
+    dead port 1/2 on $mux $procmux$527.
+    dead port 1/2 on $mux $procmux$524.
+    dead port 2/2 on $mux $procmux$521.
+    dead port 2/2 on $mux $procmux$514.
+    dead port 1/2 on $mux $procmux$512.
+    dead port 1/2 on $mux $procmux$509.
+    dead port 2/2 on $mux $procmux$506.
+    dead port 2/2 on $mux $procmux$499.
+    dead port 1/2 on $mux $procmux$497.
+    dead port 1/2 on $mux $procmux$494.
+    dead port 2/2 on $mux $procmux$491.
+    dead port 2/2 on $mux $procmux$484.
+    dead port 2/2 on $mux $procmux$774.
+    dead port 1/2 on $mux $procmux$482.
+    dead port 1/2 on $mux $procmux$479.
+    dead port 2/2 on $mux $procmux$476.
+    dead port 2/2 on $mux $procmux$469.
+    dead port 1/2 on $mux $procmux$467.
+    dead port 1/2 on $mux $procmux$464.
+    dead port 2/2 on $mux $procmux$461.
+    dead port 2/2 on $mux $procmux$454.
+    dead port 1/2 on $mux $procmux$772.
+    dead port 1/2 on $mux $procmux$452.
+    dead port 1/2 on $mux $procmux$449.
+    dead port 2/2 on $mux $procmux$446.
+    dead port 2/2 on $mux $procmux$439.
+    dead port 1/2 on $mux $procmux$437.
+    dead port 1/2 on $mux $procmux$434.
+    dead port 2/2 on $mux $procmux$431.
+    dead port 2/2 on $mux $procmux$429.
+    dead port 2/2 on $mux $procmux$421.
+    dead port 2/2 on $mux $procmux$764.
+    dead port 1/2 on $mux $procmux$419.
+    dead port 1/2 on $mux $procmux$416.
+    dead port 2/2 on $mux $procmux$413.
+    dead port 2/2 on $mux $procmux$411.
+    dead port 2/2 on $mux $procmux$403.
+    dead port 1/2 on $mux $procmux$401.
+    dead port 1/2 on $mux $procmux$398.
+    dead port 2/2 on $mux $procmux$395.
+    dead port 2/2 on $mux $procmux$393.
+    dead port 2/2 on $mux $procmux$385.
+    dead port 1/2 on $mux $procmux$762.
+    dead port 1/2 on $mux $procmux$383.
+    dead port 1/2 on $mux $procmux$380.
+    dead port 2/2 on $mux $procmux$377.
+    dead port 2/2 on $mux $procmux$375.
+    dead port 2/2 on $mux $procmux$367.
+    dead port 1/2 on $mux $procmux$365.
+    dead port 1/2 on $mux $procmux$362.
+    dead port 2/2 on $mux $procmux$359.
+    dead port 2/2 on $mux $procmux$357.
+    dead port 2/2 on $mux $procmux$349.
+    dead port 2/2 on $mux $procmux$754.
+    dead port 1/2 on $mux $procmux$347.
+    dead port 1/2 on $mux $procmux$344.
+    dead port 2/2 on $mux $procmux$341.
+    dead port 2/2 on $mux $procmux$339.
+    dead port 2/2 on $mux $procmux$331.
+    dead port 1/2 on $mux $procmux$329.
+    dead port 1/2 on $mux $procmux$326.
+    dead port 2/2 on $mux $procmux$323.
+    dead port 2/2 on $mux $procmux$321.
+    dead port 2/2 on $mux $procmux$313.
+    dead port 1/2 on $mux $procmux$311.
+    dead port 1/2 on $mux $procmux$308.
+    dead port 2/2 on $mux $procmux$305.
+    dead port 2/2 on $mux $procmux$303.
+    dead port 2/2 on $mux $procmux$300.
+    dead port 2/2 on $mux $procmux$290.
+    dead port 2/2 on $mux $procmux$748.
+    dead port 1/2 on $mux $procmux$288.
+    dead port 1/2 on $mux $procmux$285.
+    dead port 2/2 on $mux $procmux$282.
+    dead port 2/2 on $mux $procmux$280.
+    dead port 2/2 on $mux $procmux$277.
+    dead port 2/2 on $mux $procmux$268.
+    dead port 1/2 on $mux $procmux$266.
+    dead port 1/2 on $mux $procmux$263.
+    dead port 2/2 on $mux $procmux$260.
+    dead port 2/2 on $mux $procmux$258.
+    dead port 2/2 on $mux $procmux$255.
+    dead port 2/2 on $mux $procmux$247.
+    dead port 1/2 on $mux $procmux$245.
+    dead port 1/2 on $mux $procmux$242.
+    dead port 2/2 on $mux $procmux$239.
+    dead port 2/2 on $mux $procmux$237.
+    dead port 2/2 on $mux $procmux$234.
+    dead port 2/2 on $mux $procmux$742.
+    dead port 2/2 on $mux $procmux$736.
+    dead port 2/2 on $mux $procmux$730.
+Removed 141 multiplexer ports.
+<suppressed ~46 debug messages>
+
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module \vending_structural.
+  Optimizing cells in module \vending_fsm.
+    New ctrl vector for $pmux cell $procmux$840: { $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$880 }
+    New ctrl vector for $pmux cell $procmux$845: { $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$882 }
+    New ctrl vector for $pmux cell $procmux$850: { $procmux$863_CMP $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$884 }
+    New ctrl vector for $pmux cell $procmux$860: { $auto$opt_reduce.cc:134:opt_pmux$888 $auto$opt_reduce.cc:134:opt_pmux$886 }
+    New ctrl vector for $pmux cell $procmux$810: { $procmux$864_CMP $auto$opt_reduce.cc:134:opt_pmux$890 }
+    New ctrl vector for $pmux cell $procmux$855: { $procmux$863_CMP $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$892 }
+    New ctrl vector for $pmux cell $procmux$830: { $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$894 }
+    New ctrl vector for $pmux cell $procmux$825: { $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$896 }
+    New ctrl vector for $pmux cell $procmux$820: { $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$898 }
+    New ctrl vector for $pmux cell $procmux$815: { $procmux$862_CMP $auto$opt_reduce.cc:134:opt_pmux$900 }
+    New ctrl vector for $pmux cell $procmux$835: { $auto$opt_reduce.cc:134:opt_pmux$902 $procmux$861_CMP }
+  Optimizing cells in module \vending_fsm.
+Performed a total of 11 changes.
+
+5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `\vending_structural'.
+Finding identical cells in module `\vending_fsm'.
+<suppressed ~27 debug messages>
+Removed a total of 9 cells.
+
+5.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$872 ($adff) from module $paramod\RegistroPP\N=s32'00000000000000000000000000001010 (D = \D, Q = \Q).
+Adding EN signal on $procdff$873 ($adff) from module $paramod\RegistroPP\N=s32'00000000000000000000000000000010 (D = \D, Q = \Q).
+Adding EN signal on $procdff$874 ($adff) from module $paramod\RegistroPP\N=s32'00000000000000000000000000000001 (D = \D, Q = \Q).
+Adding EN signal on $procdff$875 ($adff) from module $paramod\RegistroPP\N=s32'00000000000000000000000000000110 (D = \D, Q = \Q).
+Adding EN signal on $procdff$877 ($adff) from module vending_fsm (D = $procmux$868_Y, Q = \init_counter).
+Adding EN signal on $procdff$876 ($adff) from module vending_fsm (D = \selezione, Q = \sel_latched).
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module \vending_structural..
+Finding unused cells or wires in module \vending_fsm..
+Removed 14 unused cells and 602 unused wires.
+<suppressed ~24 debug messages>
+
+5.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+5.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vending_structural..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+5.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+  Optimizing cells in module \vending_fsm.
+    New ctrl vector for $pmux cell $procmux$850: { $auto$opt_reduce.cc:134:opt_pmux$910 $auto$opt_reduce.cc:134:opt_pmux$884 }
+    New ctrl vector for $pmux cell $procmux$855: { $auto$opt_reduce.cc:134:opt_pmux$912 $auto$opt_reduce.cc:134:opt_pmux$884 }
+  Optimizing cells in module \vending_fsm.
+  Optimizing cells in module \vending_structural.
+Performed a total of 2 changes.
+
+5.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\vending_structural'.
+Removed a total of 1 cells.
+
+5.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module \vending_fsm..
+Finding unused cells or wires in module \vending_structural..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+5.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+5.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vending_structural..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+5.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+  Optimizing cells in module \vending_fsm.
+  Optimizing cells in module \vending_structural.
+Performed a total of 0 changes.
+
+5.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+Finding identical cells in module `\vending_structural'.
+Removed a total of 0 cells.
+
+5.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module \vending_fsm..
+Finding unused cells or wires in module \vending_structural..
+
+5.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+5.23. Finished OPT passes. (There is nothing left to do.)
+
+6. Executing FSM pass (extract and optimize FSM).
+
+6.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking vending_fsm.stato as FSM state register:
+    Circuit seems to be self-resetting.
+
+6.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+6.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module \vending_fsm..
+Finding unused cells or wires in module \vending_structural..
+
+6.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+6.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+6.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+6.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+Finding identical cells in module `\vending_structural'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vending_structural..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~40 debug messages>
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+  Optimizing cells in module \vending_fsm.
+  Optimizing cells in module \vending_structural.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+Finding identical cells in module `\vending_structural'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module \vending_fsm..
+Finding unused cells or wires in module \vending_structural..
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+7.9. Finished OPT passes. (There is nothing left to do.)
+
+8. Executing TECHMAP pass (map to technology primitives).
+
+8.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+8.2. Continuing TECHMAP pass.
+Using template $paramod$f3115659d5e2977ebd2cb01ff3557fc5f6187689\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $mux.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=6:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=6:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=6:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $or.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=9:Y_WIDTH=9:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=9:Y_WIDTH=9:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=9:Y_WIDTH=9:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:A_SIGNED=0:A_WIDTH=10:B_SIGNED=0:B_WIDTH=10:Y_WIDTH=10:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $eq.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=6:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=6:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=6:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$00298f3f8094950cb9a5ff2fda48d0d8bde8806c\_90_alu for cells of type $alu.
+Using template $paramod$484d51534650924b7ed4c69e46eed3a56904771f\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper maccmap for cells of type $macc.
+  add { 4'0000 \c05_calc } * 10'0000000101 (10x10 bits, unsigned)
+  add { 4'0000 \c10_calc } * 9'000000101 (10x9 bits, unsigned)
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000110 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001010 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001010 for cells of type $fa.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001001 for cells of type $fa.
+Using template $paramod$d2fa05d38998afabc6d4f34471305d0af4b8b2df\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000001001 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=4:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=4:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=4:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=4:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=4:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=4:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod$068ad458e7761d78e5eed8238508872e7b0aef95\_90_pmux for cells of type $pmux.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $reduce_and.
+Using template $paramod$740b056ede97228d3eae64ea2fdc81f0a33e0fe7\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=6:B_SIGNED=0:B_WIDTH=6:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+No more expansions possible.
+<suppressed ~2163 debug messages>
+
+9. Executing ABC pass (technology mapping using ABC).
+
+9.1. Extracting gate netlist of module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110' to `<abc-temp-dir>/input.blif'..
+Extracted 56 gates and 70 wires to a netlist network with 12 inputs and 1 outputs.
+
+9.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.1.2. Re-integrating ABC results.
+ABC RESULTS:            ANDNOT cells:        1
+ABC RESULTS:             ORNOT cells:       10
+ABC RESULTS:              NAND cells:        9
+ABC RESULTS:               AND cells:        1
+ABC RESULTS:        internal signals:       57
+ABC RESULTS:           input signals:       12
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+
+9.2. Extracting gate netlist of module `$paramod\Mux4\N=s32'00000000000000000000000000000110' to `<abc-temp-dir>/input.blif'..
+Extracted 65 gates and 94 wires to a netlist network with 26 inputs and 6 outputs.
+
+9.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.2.2. Re-integrating ABC results.
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:            ANDNOT cells:        2
+ABC RESULTS:               AND cells:       13
+ABC RESULTS:              NAND cells:       30
+ABC RESULTS:        internal signals:       62
+ABC RESULTS:           input signals:       26
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+9.3. Extracting gate netlist of module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+9.4. Extracting gate netlist of module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+9.5. Extracting gate netlist of module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+9.6. Extracting gate netlist of module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+9.7. Extracting gate netlist of module `\vending_fsm' to `<abc-temp-dir>/input.blif'..
+Extracted 264 gates and 283 wires to a netlist network with 16 inputs and 19 outputs.
+
+9.7.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.7.2. Re-integrating ABC results.
+ABC RESULTS:               XOR cells:        1
+ABC RESULTS:                OR cells:        4
+ABC RESULTS:            ANDNOT cells:       11
+ABC RESULTS:             ORNOT cells:        1
+ABC RESULTS:              NAND cells:        7
+ABC RESULTS:               AND cells:       19
+ABC RESULTS:               BUF cells:        1
+ABC RESULTS:               NOR cells:        7
+ABC RESULTS:        internal signals:      248
+ABC RESULTS:           input signals:       16
+ABC RESULTS:          output signals:       19
+Removing temp directory.
+
+9.8. Extracting gate netlist of module `\vending_structural' to `<abc-temp-dir>/input.blif'..
+Extracted 3068 gates and 3275 wires to a netlist network with 205 inputs and 150 outputs.
+
+9.8.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.8.2. Re-integrating ABC results.
+ABC RESULTS:               NOT cells:       10
+ABC RESULTS:               XOR cells:      119
+ABC RESULTS:               NOR cells:       12
+ABC RESULTS:             ORNOT cells:       19
+ABC RESULTS:            ANDNOT cells:       38
+ABC RESULTS:                OR cells:       78
+ABC RESULTS:              XNOR cells:       85
+ABC RESULTS:               MUX cells:      172
+ABC RESULTS:               AND cells:      135
+ABC RESULTS:              NAND cells:      296
+ABC RESULTS:        internal signals:     2920
+ABC RESULTS:           input signals:      205
+ABC RESULTS:          output signals:      150
+Removing temp directory.
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `\vending_structural'.
+Removed a total of 1 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_structural..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+  Optimizing cells in module \vending_fsm.
+  Optimizing cells in module \vending_structural.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+Finding identical cells in module `\vending_structural'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module \vending_fsm..
+Finding unused cells or wires in module \vending_structural..
+Removed 0 unused cells and 2509 unused wires.
+<suppressed ~43 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_fsm..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \vending_structural..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+  Optimizing cells in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+  Optimizing cells in module \vending_fsm.
+  Optimizing cells in module \vending_structural.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Finding identical cells in module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Finding identical cells in module `\vending_fsm'.
+Finding identical cells in module `\vending_structural'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\Mux4\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000001..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000010..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000000110..
+Finding unused cells or wires in module $paramod\RegistroPP\N=s32'00000000000000000000000000001010..
+Finding unused cells or wires in module \vending_fsm..
+Finding unused cells or wires in module \vending_structural..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\Mux4\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000001.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000010.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000000110.
+Optimizing module $paramod\RegistroPP\N=s32'00000000000000000000000000001010.
+Optimizing module vending_fsm.
+Optimizing module vending_structural.
+
+10.16. Finished OPT passes. (There is nothing left to do.)
+
+11. Printing statistics.
+
+=== $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110 ===
+
+   Number of wires:                 23
+   Number of wire bits:             33
+   Number of public wires:           3
+   Number of public wire bits:      13
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 21
+     $_ANDNOT_                       1
+     $_AND_                          1
+     $_NAND_                         9
+     $_ORNOT_                       10
+
+=== $paramod\Mux4\N=s32'00000000000000000000000000000110 ===
+
+   Number of wires:                 46
+   Number of wire bits:             72
+   Number of public wires:           6
+   Number of public wire bits:      32
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 46
+     $_ANDNOT_                       2
+     $_AND_                         13
+     $_NAND_                        30
+     $_NOR_                          1
+
+=== $paramod\RegistroPP\N=s32'00000000000000000000000000000001 ===
+
+   Number of wires:                  5
+   Number of wire bits:              5
+   Number of public wires:           5
+   Number of public wire bits:       5
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     $_DFFE_PN0P_                    1
+
+=== $paramod\RegistroPP\N=s32'00000000000000000000000000000010 ===
+
+   Number of wires:                  5
+   Number of wire bits:              7
+   Number of public wires:           5
+   Number of public wire bits:       7
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     $_DFFE_PN0P_                    2
+
+=== $paramod\RegistroPP\N=s32'00000000000000000000000000000110 ===
+
+   Number of wires:                  5
+   Number of wire bits:             15
+   Number of public wires:           5
+   Number of public wire bits:      15
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  6
+     $_DFFE_PN0P_                    6
+
+=== $paramod\RegistroPP\N=s32'00000000000000000000000000001010 ===
+
+   Number of wires:                  5
+   Number of wire bits:             23
+   Number of public wires:           5
+   Number of public wire bits:      23
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 10
+     $_DFFE_PN0P_                   10
+
+=== vending_fsm ===
+
+   Number of wires:                 60
+   Number of wire bits:             71
+   Number of public wires:          23
+   Number of public wire bits:      34
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 58
+     $_ANDNOT_                      11
+     $_AND_                         19
+     $_DFFE_PN0P_                    7
+     $_DFF_PN0_                      2
+     $_NAND_                         7
+     $_NOR_                          6
+     $_ORNOT_                        1
+     $_OR_                           4
+     $_XOR_                          1
+
+=== vending_structural ===
+
+   Number of wires:                935
+   Number of wire bits:           1272
+   Number of public wires:         120
+   Number of public wire bits:     457
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                993
+     $_ANDNOT_                      38
+     $_AND_                        135
+     $_MUX_                        172
+     $_NAND_                       296
+     $_NOR_                         12
+     $_NOT_                         10
+     $_ORNOT_                       19
+     $_OR_                          78
+     $_XNOR_                        85
+     $_XOR_                        119
+     $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110      1
+     $paramod\Mux4\N=s32'00000000000000000000000000000110      2
+     $paramod\RegistroPP\N=s32'00000000000000000000000000000001      4
+     $paramod\RegistroPP\N=s32'00000000000000000000000000000010      1
+     $paramod\RegistroPP\N=s32'00000000000000000000000000000110     18
+     $paramod\RegistroPP\N=s32'00000000000000000000000000001010      1
+     GreedyLogic                     1
+     vending_fsm                     1
+
+=== design hierarchy ===
+
+   vending_structural                1
+     $paramod\ComparatoreGE\N=s32'00000000000000000000000000000110      1
+     $paramod\Mux4\N=s32'00000000000000000000000000000110      2
+     $paramod\RegistroPP\N=s32'00000000000000000000000000000001      4
+     $paramod\RegistroPP\N=s32'00000000000000000000000000000010      1
+     $paramod\RegistroPP\N=s32'00000000000000000000000000000110     18
+     $paramod\RegistroPP\N=s32'00000000000000000000000000001010      1
+     vending_fsm                     1
+
+   Number of wires:               1230
+   Number of wire bits:           1840
+   Number of public wires:         278
+   Number of public wire bits:     888
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1260
+     $_ANDNOT_                      54
+     $_AND_                        181
+     $_DFFE_PN0P_                  131
+     $_DFF_PN0_                      2
+     $_MUX_                        172
+     $_NAND_                       372
+     $_NOR_                         20
+     $_NOT_                         10
+     $_ORNOT_                       30
+     $_OR_                          82
+     $_XNOR_                        85
+     $_XOR_                        120
+     GreedyLogic                     1
+
+12. Executing Verilog backend.
+
+12.1. Executing BMUXMAP pass.
+
+12.2. Executing DEMUXMAP pass.
+Dumping module `$paramod\ComparatoreGE\N=s32'00000000000000000000000000000110'.
+Dumping module `$paramod\Mux4\N=s32'00000000000000000000000000000110'.
+Dumping module `$paramod\RegistroPP\N=s32'00000000000000000000000000000001'.
+Dumping module `$paramod\RegistroPP\N=s32'00000000000000000000000000000010'.
+Dumping module `$paramod\RegistroPP\N=s32'00000000000000000000000000000110'.
+Dumping module `$paramod\RegistroPP\N=s32'00000000000000000000000000001010'.
+Dumping module `\vending_fsm'.
+Dumping module `\vending_structural'.
+
+End of script. Logfile hash: 174898e23b, CPU: user 0.44s system 0.02s, MEM: 29.85 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 45% 1x abc (0 sec), 13% 18x opt_expr (0 sec), ...

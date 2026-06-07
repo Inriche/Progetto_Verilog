@@ -1,3 +1,0 @@
-Vtb_behavioral___024root__DepSet_h89a528d7__0.o: \
- Vtb_behavioral___024root__DepSet_h89a528d7__0.cpp Vtb_behavioral__pch.h \
- Vtb_behavioral__Syms.h Vtb_behavioral___024root.h

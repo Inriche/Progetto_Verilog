@@ -1,0 +1,656 @@
+============================================================
+COMANDI BASH UTILI PER ORALE - PROGETTO VENDING MACHINE
+============================================================
+
+CARTELLA PROGETTO:
+VR500238_VR501618_VR511772
+
+IDEA GENERALE:
+- Prima controllo dove sono.
+- Poi controllo la struttura del progetto.
+- Poi eseguo compile.sh.
+- Poi mostro output, report, VCD e mismatch.
+- Poi, se richiesto, mostro singole parti del codice o Yosys.
+- Alla fine posso mostrare pulizia e tarball.
+
+============================================================
+1) ENTRARE NELLA CARTELLA DEL PROGETTO
+============================================================
+
+cd /mnt/c/Users/i.ouzounov/Desktop/_Archives/architettura/architettura/VR500238_VR501618_VR511772
+
+SPIEGAZIONE:
+Entro nella cartella principale del progetto, cioè quella che contiene:
+behavioral/
+structural/
+testbench.v
+compile.sh
+relazione.pdf
+risultati/
+
+Se il percorso cambia, mi porto nella cartella corretta e uso pwd per verificarlo.
+
+
+============================================================
+2) VERIFICARE DOVE MI TROVO
+============================================================
+
+pwd
+
+SPIEGAZIONE:
+Mostra il percorso corrente.
+Serve per far vedere che sto lavorando nella root del progetto.
+
+
+============================================================
+3) MOSTRARE LA STRUTTURA PRINCIPALE DEL PROGETTO
+============================================================
+
+ls -la
+
+SPIEGAZIONE:
+Mostra i file e le cartelle principali.
+Qui devono comparire almeno:
+behavioral/
+structural/
+testbench.v
+compile.sh
+relazione.pdf
+risultati/
+
+
+============================================================
+4) MOSTRARE LA STRUTTURA A 2 LIVELLI
+============================================================
+
+find . -maxdepth 2 -type f | sort
+
+SPIEGAZIONE:
+Mostra i file principali dentro behavioral e structural.
+È utile per far vedere rapidamente tutti i sorgenti Verilog e i testbench.
+
+Output atteso indicativo:
+./behavioral/tb_behavioral.v
+./behavioral/vending_behavioral.v
+./structural/components.v
+./structural/GreedyLogic.v
+./structural/tb_structural.v
+./structural/vending_fsm.v
+./structural/vending_structural.v
+./testbench.v
+./compile.sh
+
+
+============================================================
+5) VERIFICARE CHE compile.sh ESISTA
+============================================================
+
+ls -l compile.sh
+
+SPIEGAZIONE:
+Controllo che lo script richiesto dalla consegna sia presente nella root del progetto.
+
+
+============================================================
+6) RENDERE compile.sh ESEGUIBILE, SE SERVE
+============================================================
+
+chmod +x compile.sh
+
+SPIEGAZIONE:
+Rende lo script eseguibile.
+Non è sempre necessario, perché posso anche lanciarlo con bash compile.sh.
+
+
+============================================================
+7) ESEGUIRE TUTTO IL FLUSSO DI VALIDAZIONE
+============================================================
+
+bash compile.sh
+
+SPIEGAZIONE:
+Questo è il comando più importante.
+
+Lo script esegue:
+1. simulazione behavioral;
+2. simulazione structural;
+3. comparison behavioral vs structural.
+
+Output finale atteso:
+
+[PASS] behavioral simulation completed
+[PASS] structural simulation completed
+[PASS] behavioral vs structural comparison: mismatch=0
+ALL TESTS PASSED
+
+Frase da dire:
+"Con un solo comando viene riprodotto tutto il flusso di verifica. Se una compilazione, una simulazione o il comparison fallisce, lo script si interrompe."
+
+
+============================================================
+8) VERIFICARE GLI ESEGUIBILI GENERATI
+============================================================
+
+ls -la obj_dir | head
+
+SPIEGAZIONE:
+Mostra che Verilator ha generato la cartella obj_dir.
+Dentro vengono prodotti gli eseguibili/codice generato per le simulazioni.
+
+
+============================================================
+9) VERIFICARE I FILE VCD GENERATI
+============================================================
+
+ls -lh *.vcd
+
+SPIEGAZIONE:
+Mostra i file di waveform generati.
+
+File attesi:
+simulazione_behavioral.vcd
+simulazione_structural.vcd
+simulazione_comparison.vcd
+
+Frase da dire:
+"I VCD possono essere aperti con GTKWave per controllare le forme d’onda."
+
+
+============================================================
+10) APRIRE UNA WAVEFORM CON GTKWave
+============================================================
+
+gtkwave simulazione_comparison.vcd
+
+SPIEGAZIONE:
+Apre la waveform del testbench comparison.
+È la più utile perché contiene behavioral e structural insieme.
+
+Se voglio vedere solo behavioral:
+gtkwave simulazione_behavioral.vcd
+
+Se voglio vedere solo structural:
+gtkwave simulazione_structural.vcd
+
+
+============================================================
+11) MOSTRARE I REPORT GENERATI
+============================================================
+
+ls -lh risultati/
+
+SPIEGAZIONE:
+Mostra i file dentro la cartella risultati.
+Qui ci sono gli output dei test e i log/statistiche di sintesi.
+
+
+============================================================
+12) LEGGERE IL REPORT COMPARISON
+============================================================
+
+cat risultati/output_comparison.txt
+
+SPIEGAZIONE:
+Mostra tutti i casi di test del comparison.
+È utile per far vedere i test applicati, gli output ottenuti e i PASS.
+
+Se il file è lungo:
+less risultati/output_comparison.txt
+
+Dentro less:
+- freccia giù/su per scorrere
+- q per uscire
+
+
+============================================================
+13) CERCARE SOLO I TEST NEL REPORT COMPARISON
+============================================================
+
+grep -n "TEST" risultati/output_comparison.txt
+
+SPIEGAZIONE:
+Mostra l’elenco dei test con il numero di riga.
+Utile se il professore chiede:
+"Mi fai vedere dove sono i casi di test?"
+
+
+============================================================
+14) CERCARE SOLO I PASS NEL REPORT COMPARISON
+============================================================
+
+grep -n "PASS" risultati/output_comparison.txt
+
+SPIEGAZIONE:
+Mostra tutti i test che sono passati.
+
+
+============================================================
+15) VERIFICARE mismatch = 0
+============================================================
+
+grep -n "mismatch" risultati/output_comparison.txt
+
+SPIEGAZIONE:
+Cerca la riga finale del comparison.
+
+Output atteso:
+done mismatch=0
+
+Frase da dire:
+"mismatch uguale a zero indica che behavioral e structural hanno prodotto gli stessi output nei casi testati."
+
+
+============================================================
+16) CONTARE QUANTI TEST SONO STATI ESEGUITI
+============================================================
+
+grep -c "\[TEST" risultati/output_comparison.txt
+
+SPIEGAZIONE:
+Conta quanti casi di test sono presenti nel report.
+Serve se il prof chiede quanti test avete fatto.
+
+
+============================================================
+17) MOSTRARE GLI ULTIMI RISULTATI DEL REPORT
+============================================================
+
+tail -n 30 risultati/output_comparison.txt
+
+SPIEGAZIONE:
+Mostra la parte finale del report, dove di solito si vede il risultato conclusivo.
+
+
+============================================================
+18) ESEGUIRE SOLO IL MODELLO BEHAVIORAL, SE GIÀ COMPILATO
+============================================================
+
+./obj_dir/behavioral
+
+SPIEGAZIONE:
+Esegue solo la simulazione behavioral già generata.
+Serve se il prof vuole vedere separatamente la versione behavioral.
+
+
+============================================================
+19) ESEGUIRE SOLO IL MODELLO STRUCTURAL, SE GIÀ COMPILATO
+============================================================
+
+./obj_dir/structural
+
+SPIEGAZIONE:
+Esegue solo la simulazione structural già generata.
+Serve se il prof vuole vedere separatamente la versione strutturale.
+
+
+============================================================
+20) ESEGUIRE SOLO IL COMPARISON, SE GIÀ COMPILATO
+============================================================
+
+./obj_dir/comparison
+
+SPIEGAZIONE:
+Esegue solo il confronto tra behavioral e structural già compilato.
+
+Da usare dopo:
+bash compile.sh
+
+perché prima gli eseguibili devono essere generati.
+
+
+============================================================
+21) MOSTRARE I MODULI PRINCIPALI
+============================================================
+
+grep -n "module" behavioral/vending_behavioral.v structural/vending_structural.v structural/vending_fsm.v structural/GreedyLogic.v testbench.v
+
+SPIEGAZIONE:
+Mostra dove sono dichiarati i moduli principali:
+vending_behavioral
+vending_structural
+vending_fsm
+GreedyLogic
+testbench
+
+
+============================================================
+22) MOSTRARE GLI INCLUDE NELLA STRUCTURAL
+============================================================
+
+grep -n "include" structural/*.v
+
+SPIEGAZIONE:
+Mostra quali file vengono inclusi.
+Serve per spiegare perché components.v non viene passato due volte a Verilator se è già incluso nel file principale.
+
+
+============================================================
+23) MOSTRARE GLI STATI DELLA FSM
+============================================================
+
+grep -n "S_INIT\|S_IDLE\|S_OPERATIVA\|S_EROGAZIONE" structural/vending_fsm.v
+
+SPIEGAZIONE:
+Mostra dove sono definiti e usati gli stati principali della FSM.
+
+Frase da dire:
+"La FSM è organizzata in quattro stati: inizializzazione, attesa, fase operativa ed erogazione."
+
+
+============================================================
+24) MOSTRARE LA LOGICA DI SELEZIONE VALIDA
+============================================================
+
+grep -n "valid_sel" structural/vending_fsm.v structural/vending_structural.v
+
+SPIEGAZIONE:
+Mostra dove viene riconosciuta una selezione valida.
+
+Selezioni valide:
+100 prodotto 1
+101 prodotto 2
+110 prodotto 3
+111 prodotto 4
+
+
+============================================================
+25) MOSTRARE LA SCELTA PROGETTUALE SULL’ERRORE 10
+============================================================
+
+grep -n "err_calc\|2'b10\|errore" structural/vending_structural.v behavioral/vending_behavioral.v
+
+SPIEGAZIONE:
+Serve per mostrare la scelta progettuale:
+selezione invalida -> errore = 10
+
+Frase da dire:
+"La specifica non assegna un codice separato alla selezione invalida. Noi l’abbiamo gestita come caso di prodotto non erogabile, quindi errore 10."
+
+
+============================================================
+26) MOSTRARE payout_active
+============================================================
+
+grep -n "payout_active" structural/vending_structural.v
+
+SPIEGAZIONE:
+Mostra il segnale che unifica:
+- resto dopo acquisto valido;
+- restituzione credito in caso di annullamento.
+
+Frase da dire:
+"payout_active abilita la logica di restituzione sia quando l’acquisto è valido sia quando l’utente annulla."
+
+
+============================================================
+27) MOSTRARE disponibile
+============================================================
+
+grep -n "disponibile" structural/vending_structural.v behavioral/vending_behavioral.v
+
+SPIEGAZIONE:
+Mostra dove viene gestito disponibile[9:0].
+
+Frase da dire:
+"disponibile rappresenta il valore monetario totale interno alla macchina, distinto dalle quantità dei singoli tagli di moneta."
+
+
+============================================================
+28) MOSTRARE GreedyLogic
+============================================================
+
+grep -n "module GreedyLogic\|always @\|c10\|c05\|c02\|c01" structural/GreedyLogic.v
+
+SPIEGAZIONE:
+Mostra il modulo che calcola le monete da restituire.
+È combinatorio, quindi non ha clock.
+
+Frase da dire:
+"GreedyLogic calcola la scomposizione del resto partendo dal taglio più grande, tenendo conto delle monete disponibili."
+
+
+============================================================
+29) MOSTRARE I TASK NEL TESTBENCH
+============================================================
+
+grep -n "task\|endtask" testbench.v behavioral/tb_behavioral.v structural/tb_structural.v
+
+SPIEGAZIONE:
+Mostra le task usate nei testbench.
+Le task servono a evitare codice duplicato e rendere i test più leggibili.
+
+
+============================================================
+30) MOSTRARE I CASI DI TEST NEL TESTBENCH
+============================================================
+
+grep -n "\[TEST" testbench.v behavioral/tb_behavioral.v structural/tb_structural.v
+
+SPIEGAZIONE:
+Mostra dove sono scritti i casi di test nei sorgenti Verilog.
+
+
+============================================================
+31) MOSTRARE LE ASSERT/FATAL NEL TESTBENCH
+============================================================
+
+grep -n "fatal\|EXPECT FAIL\|mismatch_count\|check" testbench.v
+
+SPIEGAZIONE:
+Mostra dove il testbench fallisce se trova un output sbagliato.
+
+Frase da dire:
+"Il testbench non si limita a stampare valori: confronta automaticamente behavioral, structural e expected."
+
+
+============================================================
+32) MOSTRARE I LOG YOSYS
+============================================================
+
+ls -lh risultati/*yosys* risultati/*synth* 2>/dev/null
+
+SPIEGAZIONE:
+Mostra i file collegati alla sintesi Yosys, se presenti.
+
+
+============================================================
+33) ESTRARRE LE STATISTICHE YOSYS BEHAVIORAL
+============================================================
+
+echo "=== BEHAVIORAL ==="
+tac risultati/yosys_behavioral_final.log | awk '/Number of cells:|Number of wire bits:|Number of wires:/{print; c++} c==3{exit}' | tac
+
+SPIEGAZIONE:
+Mostra le metriche finali di sintesi behavioral:
+Number of wires
+Number of wire bits
+Number of cells
+
+
+============================================================
+34) ESTRARRE LE STATISTICHE YOSYS STRUCTURAL
+============================================================
+
+echo "=== STRUCTURAL ==="
+tac risultati/yosys_structural_final.log | awk '/Number of cells:|Number of wire bits:|Number of wires:/{print; c++} c==3{exit}' | tac
+
+SPIEGAZIONE:
+Mostra le metriche finali di sintesi structural:
+Number of wires
+Number of wire bits
+Number of cells
+
+
+============================================================
+35) ESTRARRE ENTRAMBE LE STATISTICHE YOSYS INSIEME
+============================================================
+
+echo "=== BEHAVIORAL ==="
+tac risultati/yosys_behavioral_final.log | awk '/Number of cells:|Number of wire bits:|Number of wires:/{print; c++} c==3{exit}' | tac
+
+echo "=== STRUCTURAL ==="
+tac risultati/yosys_structural_final.log | awk '/Number of cells:|Number of wire bits:|Number of wires:/{print; c++} c==3{exit}' | tac
+
+SPIEGAZIONE:
+Comando comodo da usare direttamente all’orale.
+
+Output atteso:
+Behavioral:
+Number of wires:      4129
+Number of wire bits:  4690
+Number of cells:      4218
+
+Structural:
+Number of wires:      1230
+Number of wire bits:  1840
+Number of cells:      1260
+
+Frase da dire:
+"Nel flusso Yosys usato, la versione structural produce meno celle, ma il risultato dipende dal flusso di sintesi e dalle ottimizzazioni."
+
+
+============================================================
+36) CONTROLLARE CHE NON CI SIANO FILE INUTILI PRIMA DEL TAR
+============================================================
+
+find . -maxdepth 2 \( -name "obj_dir" -o -name "*.vcd" -o -name "*.core" -o -name "core" \)
+
+SPIEGAZIONE:
+Mostra eventuali file/cartelle da rimuovere prima della consegna.
+La specifica chiede di pulire obj_dir e i file .vcd prima del tar.
+
+
+============================================================
+37) PULIRE FILE GENERATI DA SIMULAZIONE
+============================================================
+
+rm -rf obj_dir
+rm -f *.vcd
+rm -f core *.core
+
+SPIEGAZIONE:
+Rimuove:
+- obj_dir;
+- waveform VCD;
+- eventuali core dump.
+
+Da usare solo prima di preparare la consegna definitiva.
+Non usarlo se vuoi mostrare le waveform subito dopo.
+
+
+============================================================
+38) CONTROLLARE CHE LA PULIZIA SIA RIUSCITA
+============================================================
+
+find . -maxdepth 2 \( -name "obj_dir" -o -name "*.vcd" -o -name "*.core" -o -name "core" \)
+
+SPIEGAZIONE:
+Se non stampa nulla, la cartella è pulita.
+
+
+============================================================
+39) USCIRE DI UN LIVELLO PER CREARE IL TAR
+============================================================
+
+cd ..
+
+SPIEGAZIONE:
+La specifica richiede di creare il tarball dal livello sopra la cartella del progetto.
+
+
+============================================================
+40) CREARE IL TAR FINALE
+============================================================
+
+tar czfv VR500238_VR501618_VR511772.tar.gz VR500238_VR501618_VR511772/
+
+SPIEGAZIONE:
+Crea il file da consegnare:
+VR500238_VR501618_VR511772.tar.gz
+
+Il tar deve contenere una sola cartella principale:
+VR500238_VR501618_VR511772/
+
+
+============================================================
+41) CONTROLLARE IL CONTENUTO DEL TAR
+============================================================
+
+tar tzf VR500238_VR501618_VR511772.tar.gz | head -50
+
+SPIEGAZIONE:
+Mostra i primi file contenuti nel tarball.
+Serve a verificare che il pacchetto non contenga file messi male o cartelle duplicate.
+
+
+============================================================
+42) CONTROLLARE CHE IL TAR CONTENGA UNA SOLA CARTELLA PRINCIPALE
+============================================================
+
+tar tzf VR500238_VR501618_VR511772.tar.gz | cut -d/ -f1 | sort -u
+
+SPIEGAZIONE:
+Output atteso:
+VR500238_VR501618_VR511772
+
+Se stampa più cartelle, il tar è sbagliato.
+Perché ovviamente anche comprimere una cartella è diventato un esame nell’esame.
+
+
+============================================================
+43) CONTROLLARE DIMENSIONE DEL TAR
+============================================================
+
+ls -lh VR500238_VR501618_VR511772.tar.gz
+
+SPIEGAZIONE:
+Mostra dimensione e presenza del file finale.
+
+
+============================================================
+44) TESTARE IL TAR IN UNA CARTELLA TEMPORANEA
+============================================================
+
+mkdir -p /tmp/check_vending
+rm -rf /tmp/check_vending/*
+tar xzf VR500238_VR501618_VR511772.tar.gz -C /tmp/check_vending
+cd /tmp/check_vending/VR500238_VR501618_VR511772
+bash compile.sh
+
+SPIEGAZIONE:
+Questo è il test più serio prima della consegna.
+Simula quello che farà il professore o il bot automatico:
+estrae il tar in una cartella pulita e lancia compile.sh.
+
+Output atteso:
+ALL TESTS PASSED
+
+
+============================================================
+45) TORNARE ALLA CARTELLA ORIGINALE, SE SERVE
+============================================================
+
+cd /mnt/c/Users/i.ouzounov/Desktop/_Archives/architettura/architettura/VR500238_VR501618_VR511772
+
+SPIEGAZIONE:
+Torno alla cartella originale del progetto.
+
+
+============================================================
+COMANDI RAPIDI DA MEMORIZZARE
+============================================================
+
+pwd
+ls -la
+find . -maxdepth 2 -type f | sort
+bash compile.sh
+cat risultati/output_comparison.txt
+grep -n "mismatch" risultati/output_comparison.txt
+grep -n "TEST" risultati/output_comparison.txt
+gtkwave simulazione_comparison.vcd
+grep -n "valid_sel\|err_calc\|payout_active\|disponibile" structural/vending_structural.v
+grep -n "S_INIT\|S_IDLE\|S_OPERATIVA\|S_EROGAZIONE" structural/vending_fsm.v
+rm -rf obj_dir && rm -f *.vcd
+cd ..
+tar czfv VR500238_VR501618_VR511772.tar.gz VR500238_VR501618_VR511772/
+tar tzf VR500238_VR501618_VR511772.tar.gz | cut -d/ -f1 | sort -u

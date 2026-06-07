@@ -1,0 +1,15 @@
+design -reset
+
+read_verilog risultati/vending_fsm_for_kiss.v
+hierarchy -check -top vending_fsm
+
+proc
+opt_clean
+
+fsm_detect
+fsm_extract
+fsm_info
+
+fsm_export -o risultati/vending_fsm_raw.kiss2
+stat
+
