@@ -51,43 +51,25 @@ The repository also includes simulation outputs and generated artifacts produced
 ```text
 
 vending-machine-verilog/
-
 ├── behavioral/
-
-│   ├── vending\_behavioral.v
-
-│   └── tb\_behavioral.v
-
 ├── structural/
-
-│   ├── vending\_structural.v
-
-│   ├── vending\_fsm.v
-
-│   ├── GreedyLogic.v
-
-│   ├── components.v
-
-│   └── tb\_structural.v
-
 ├── risultati/
-
-├── obj\_dir/
-
+├── obj_dir/
 ├── testbench.v
-
 ├── compile.sh
-
-├── Relazione.pdf
-
-├── datapath\_finale.png
-
-├── simulazione\_behavioral.vcd
-
-├── simulazione\_structural.vcd
-
-└── simulazione\_comparison.vcd
-
+├── simulazione_behavioral.vcd
+├── simulazione_structural.vcd
+├── simulazione_comparison.vcd
+└── utili/
+    ├── immagini/
+    │   └── datapath_finale.png
+    ├── consegna/
+    │   ├── Relazione.pdf
+    │   ├── Relazione.docx
+    │   ├── VERILOG2026.pdf
+    │   └── vending-machine-verilog-full.tar.gz
+    └── appunti/
+        └── comandi_orale.txt
 ```
 
 
